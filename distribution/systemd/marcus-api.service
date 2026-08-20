@@ -1,0 +1,23 @@
+[Unit]
+Description=Marcus REST API
+After=network-online.target marcusd.service
+Wants=network-online.target
+Requires=marcusd.service
+
+[Service]
+Type=simple
+User=marcus
+Group=marcus
+UMask=0077
+WorkingDirectory=/var/lib/marcus
+ExecStart=/usr/local/bin/marcus-api --config /etc/marcus/marcus-api.json
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadOnlyPaths=/etc/marcus
+
+[Install]
+WantedBy=multi-user.target

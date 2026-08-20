@@ -1,0 +1,25 @@
+[Unit]
+Description=Marcus daemon and Kernel authority
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=marcus
+Group=marcus
+UMask=0077
+WorkingDirectory=/var/lib/marcus
+RuntimeDirectory=marcus
+StateDirectory=marcus
+LogsDirectory=marcus
+ExecStart=/usr/local/bin/marcusd --config /etc/marcus/marcusd.json
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/marcus /var/log/marcus /run/marcus
+
+[Install]
+WantedBy=multi-user.target

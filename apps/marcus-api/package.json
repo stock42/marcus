@@ -1,0 +1,23 @@
+{
+  "name": "@marcus/api",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "@marcus/contracts": "workspace:*",
+    "@marcus/observability": "workspace:*",
+    "@marcus/protocol": "workspace:*",
+    "@marcus/protocol-client": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "s42-core": "3.0.13",
+    "zod": "^4.4.3"
+  },
+  "scripts": {
+    "build": "bun -e \"process.exit(0)\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "tsc -p tsconfig.json",
+    "test": "bun test ./src",
+    "dev": "bun src/index.ts"
+  }
+}

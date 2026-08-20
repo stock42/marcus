@@ -1,0 +1,23 @@
+{
+  "nodeId": "marcus-primary",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 4242,
+    "tls": "disabled-loopback"
+  },
+  "dataDir": "/var/lib/marcus",
+  "projectsDir": "/var/lib/marcus/projects",
+  "databasePath": "/var/lib/marcus/kernel.db",
+  "logsDir": "/var/log/marcus",
+  "runtimeDir": "/run/marcus",
+  "buildDir": "/var/lib/marcus/builds",
+  "runtimeHostExecutable": "/usr/local/lib/marcus/marcus-runtime-host",
+  "agentProcessExecutable": "/usr/local/lib/marcus/marcus-agent-process",
+  "manifestLoaderExecutable": "/usr/local/lib/marcus/marcus-manifest-loader",
+  "secrets": {
+    "keyFile": "/var/lib/marcus/secrets.key"
+  },
+  "bootstrap": {
+    "tokenFile": "/var/lib/marcus/bootstrap.token"
+  }
+}

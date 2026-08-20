@@ -1,0 +1,17 @@
+{
+  "name": "@marcus/marcusd",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "@marcus/service": "workspace:*"
+  },
+  "scripts": {
+    "build": "bun -e \"process.exit(0)\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "tsc -p tsconfig.json",
+    "test": "bun test ./src",
+    "dev": "bun src/index.ts"
+  }
+}

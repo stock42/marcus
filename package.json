@@ -1,0 +1,68 @@
+{
+  "name": "marcus-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bun-first agentic operating system for building, running and supervising AI agents",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stock42/marcus.git"
+  },
+  "homepage": "https://projectmarcus.com",
+  "bugs": {
+    "url": "https://github.com/stock42/marcus/issues"
+  },
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "engines": {
+    "bun": ">=1.3.14"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --filter=@marcus/marcusd --filter=@marcus/api",
+    "api": "turbo run dev --filter=@marcus/api",
+    "dev:backoffice": "turbo run dev --filter=@marcus/backoffice",
+    "backoffice": "bun run build:backoffice && turbo run start --filter=@marcus/backoffice",
+    "web": "turbo run dev --filter=@marcus/web",
+    "web:production": "turbo run start --filter=@marcus/web",
+    "dev:studio": "turbo run dev --filter=@marcus/studio-gateway",
+    "studio": "turbo run start --filter=@marcus/studio-gateway",
+    "verify:studio-provider": "bun run --cwd apps/marcus-studio-gateway verify:provider",
+    "build:backoffice": "turbo run build --filter=@marcus/backoffice",
+    "build": "turbo run build --filter=@marcus/backoffice --filter=@marcus/web --filter=@marcus/studio-gateway",
+    "test": "turbo run test && bun test tooling",
+    "test:browser:backoffice": "bun run build:backoffice && playwright test --config tooling/playwright.config.ts",
+    "test:browser:web": "turbo run build --filter=@marcus/web && playwright test --config tooling/playwright-website.config.ts",
+    "test:browser": "bun run test:browser:backoffice && bun run test:browser:web",
+    "test:unit": "bun run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "pack": "turbo run pack",
+    "verify:no-dist": "bun tooling/verify-no-dist.ts",
+    "verify:boundaries": "bun tooling/verify-boundaries.ts",
+    "verify:build": "bun tooling/verify-built-packages.ts",
+    "build:executables": "bun tooling/build-executables.ts",
+    "build:artifact": "bun tooling/build-artifact.ts",
+    "package:release": "bun tooling/package-release.ts",
+    "package:backoffice": "bun tooling/package-backoffice.ts",
+    "package:changed": "bun tooling/package-changed.ts",
+    "test:installer": "bun tooling/installer-smoke.ts",
+    "verify:public-installer": "bun tooling/verify-public-installer.ts",
+    "verify:public": "bun tooling/verify-public-repository.ts",
+    "publish:sdk:dry-run": "bun tooling/publish-sdk.ts --dry-run",
+    "publish:sdk": "bun tooling/publish-sdk.ts",
+    "check": "bun run verify:no-dist && bun run verify:boundaries && bun run typecheck && bun run test && bun run build && bun run verify:build && bun run test:browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@types/bun": "1.3.14",
+    "turbo": "2.10.9",
+    "typescript": "7.0.2"
+  },
+  "patchedDependencies": {
+    "s42-core@3.0.13": "patches/s42-core@3.0.13.patch"
+  }
+}

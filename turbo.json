@@ -1,0 +1,88 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
+    },
+    "pack": {
+      "dependsOn": ["^typecheck"],
+      "cache": false,
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "passThroughEnv": [
+        "PORT",
+        "MARCUS_API_URL",
+        "MARCUS_BACKOFFICE_PORT",
+        "MARCUS_WEB_PORT",
+        "MARCUS_STUDIO_PORT",
+        "MARCUS_STUDIO_DATA_DIR",
+        "MARCUS_STUDIO_DATABASE_PATH",
+        "MARCUS_STUDIO_ALLOWED_ORIGINS",
+        "MARCUS_STUDIO_TRUST_PROXY",
+        "MARCUS_STUDIO_SECURE_COOKIES",
+        "MARCUS_STUDIO_SESSION_TTL_MS",
+        "MARCUS_STUDIO_REPLAY_TTL_MS",
+        "MARCUS_STUDIO_DEEPSEEK_API_KEY",
+        "MARCUS_STUDIO_DEEPSEEK_API_KEY_FILE",
+        "MARCUS_STUDIO_DEEPSEEK_BASE_URL",
+        "MARCUS_STUDIO_DEEPSEEK_MODEL",
+        "MARCUS_STUDIO_PROVIDER_TIMEOUT_MS",
+        "MARCUS_STUDIO_MAX_CONCURRENT",
+        "MARCUS_STUDIO_DAILY_LLM_CALLS",
+        "MARCUS_STUDIO_MAX_OUTPUT_TOKENS",
+        "MARCUS_LOGS_DIR",
+        "MARCUS_ALLOWED_ORIGINS",
+        "MARCUS_API_SERVICE_TOKEN",
+        "MARCUSD_HOST",
+        "MARCUSD_PORT",
+        "MARCUS_SECRETS_MASTER_KEY",
+        "MARCUS_RUNTIME_HOST_EXECUTABLE",
+        "MARCUS_AGENT_PROCESS_EXECUTABLE",
+        "MARCUS_MANIFEST_LOADER_EXECUTABLE"
+      ]
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "passThroughEnv": [
+        "MARCUS_API_URL",
+        "MARCUS_BACKOFFICE_PORT",
+        "MARCUS_WEB_PORT",
+        "MARCUS_STUDIO_PORT",
+        "MARCUS_STUDIO_DATA_DIR",
+        "MARCUS_STUDIO_DATABASE_PATH",
+        "MARCUS_STUDIO_ALLOWED_ORIGINS",
+        "MARCUS_STUDIO_TRUST_PROXY",
+        "MARCUS_STUDIO_SECURE_COOKIES",
+        "MARCUS_STUDIO_SESSION_TTL_MS",
+        "MARCUS_STUDIO_REPLAY_TTL_MS",
+        "MARCUS_STUDIO_DEEPSEEK_API_KEY",
+        "MARCUS_STUDIO_DEEPSEEK_API_KEY_FILE",
+        "MARCUS_STUDIO_DEEPSEEK_BASE_URL",
+        "MARCUS_STUDIO_DEEPSEEK_MODEL",
+        "MARCUS_STUDIO_PROVIDER_TIMEOUT_MS",
+        "MARCUS_STUDIO_MAX_CONCURRENT",
+        "MARCUS_STUDIO_DAILY_LLM_CALLS",
+        "MARCUS_STUDIO_MAX_OUTPUT_TOKENS",
+        "MARCUS_LOGS_DIR"
+      ]
+    }
+  }
+}

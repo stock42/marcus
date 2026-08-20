@@ -1,0 +1,17 @@
+node_modules/
+.turbo/
+.next/
+build/
+docs/
+/private/
+coverage/
+/artifacts/
+apps/marcus-web/public/releases/
+*.db
+*.db-shm
+*.db-wal
+*.log
+.DS_Store
+.marcus/
+.marcus-data/
+/apps/marcus-studio-gateway/.env

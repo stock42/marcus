@@ -1,0 +1,10 @@
+{
+  "port": 5724,
+  "logsDir": "/var/log/marcus",
+  "allowedOrigins": [],
+  "serviceTokenFile": "/var/lib/marcus/api.token",
+  "upstream": {
+    "hostname": "127.0.0.1",
+    "port": 4242
+  }
+}

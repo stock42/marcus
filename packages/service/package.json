@@ -1,0 +1,34 @@
+{
+  "name": "@marcus/service",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@marcus/compiler": "workspace:*",
+    "@marcus/contracts": "workspace:*",
+    "@marcus/kernel": "workspace:*",
+    "@marcus/markdown": "workspace:*",
+    "@marcus/observability": "workspace:*",
+    "@marcus/project-files": "workspace:*",
+    "@marcus/protocol": "workspace:*",
+    "@marcus/provider-contracts": "workspace:*",
+    "@marcus/runtime-host": "workspace:*",
+    "@marcus/schema": "workspace:*",
+    "@marcus/secrets": "workspace:*",
+    "@marcus/storage-sqlite": "workspace:*"
+  },
+  "scripts": {
+    "build": "bun -e \"process.exit(0)\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "tsc -p tsconfig.json",
+    "test": "bun test ./src"
+  }
+}

@@ -1,0 +1,51 @@
+#!/bin/sh
+# Licensed under the Apache License, Version 2.0.
+set -eu
+
+release_base_url="${MARCUS_RELEASE_BASE_URL:-https://projectmarcus.com/releases/stable}"
+
+status() {
+  printf '[marcus] %s\n' "$*" >&2
+}
+
+download_file() {
+  download_url="$1"
+  download_destination="$2"
+  if [ -t 2 ]; then
+    curl --fail --location --show-error --progress-bar "$download_url" -o "$download_destination"
+  else
+    curl -fsSL "$download_url" -o "$download_destination"
+  fi
+}
+
+command -v curl >/dev/null 2>&1 || {
+  printf 'curl is required.\n' >&2
+  exit 3
+}
+
+status 'Detectando sistema operativo y arquitectura...'
+
+case "$(uname -s)" in
+  Linux) platform="linux" ;;
+  Darwin) platform="darwin" ;;
+  *) printf 'Marcus supports Linux and macOS.\n' >&2; exit 4 ;;
+esac
+
+case "$(uname -m)" in
+  x86_64|amd64) architecture="x64" ;;
+  arm64|aarch64) architecture="arm64" ;;
+  *) printf 'Unsupported architecture: %s\n' "$(uname -m)" >&2; exit 4 ;;
+esac
+
+target="$platform-$architecture"
+target_base_url="$release_base_url/$target"
+temporary="$(mktemp -d)"
+trap 'rm -rf "$temporary"' EXIT HUP INT TERM
+
+status "Plataforma detectada: $target"
+status 'Descargando el instalador de la release de Marcus...'
+download_file "$target_base_url/distribution/install.sh" "$temporary/install.sh"
+status 'Instalador listo. Resolviendo el manifiesto estable...'
+sh "$temporary/install.sh" \
+  --manifest-url "$target_base_url/release-manifest.json" \
+  "$@"

@@ -1,0 +1,181 @@
+{
+  "steps": [
+    {
+      "id": "install",
+      "number": "01",
+      "label": "Instalar",
+      "title": "CLI y servidor, sin clonar el repositorio.",
+      "description": "El script público detecta plataforma y arquitectura, valida tamaños y SHA-256, e instala por separado el CLI y los procesos del servidor.",
+      "lines": [
+        {
+          "kind": "command",
+          "scope": "shell",
+          "command": "curl -fsSL https://projectmarcus.com/install | sh",
+          "value": "curl -fsSL https://projectmarcus.com/install | sh"
+        },
+        {
+          "kind": "output",
+          "value": "[marcus] Plataforma detectada: linux-x64\n[marcus] Marcus 0.1.0 requiere 9 partes (206.2 MiB en total).\n[marcus] Descargando parte 1/9: marcus-release-linux-x64.tar.gz.part-000 (24.0 MiB)\n[marcus] … descarga y verificación visibles hasta 9/9 …\n[marcus] Instalación completada correctamente.\nMarcus 0.1.0 installed for linux-x64.\nMarcus home: /home/developer/.marcus\nPublic executables: /home/developer/.marcus/bin\nRuntime Host components: /home/developer/.marcus/lib/marcus\n\nPróximos pasos:\n1. Terminal 1: /home/developer/.marcus/bin/marcusd\n2. Terminal 2: bootstrap del administrador\n3. Terminal 2: /home/developer/.marcus/bin/marcus-api\n4. Terminal 3: abrir la CLI con --username admin --password\n\nBackoffice separado: bun run backoffice · http://127.0.0.1:6636"
+        }
+      ]
+    },
+    {
+      "id": "start",
+      "number": "02",
+      "label": "Iniciar",
+      "title": "La autoridad vive en tu máquina.",
+      "description": "Iniciá el daemon, creá el administrador una sola vez y entrá a la consola. Marcus comprueba agent.default antes de mostrar el prompt.",
+      "lines": [
+        {
+          "kind": "command",
+          "scope": "shell",
+          "command": "marcusd",
+          "value": "marcusd"
+        },
+        {
+          "kind": "output",
+          "value": "{\"level\":\"info\",\"event\":\"marcusd.ready\",\"nodeId\":\"node-019ff2...\",\"address\":{\"hostname\":\"127.0.0.1\",\"port\":4242},\"bootstrapMode\":true,\"bootstrapTokenFile\":\"/home/developer/.marcus/bootstrap.token\"}"
+        },
+        {
+          "kind": "command",
+          "scope": "shell",
+          "command": "marcus --bootstrap-token-file ~/.marcus/bootstrap.token --command 'bootstrap setup --username admin'",
+          "value": "marcus --bootstrap-token-file ~/.marcus/bootstrap.token --command 'bootstrap setup --username admin'"
+        },
+        {
+          "kind": "muted",
+          "value": "Enter a password for administrator \"admin\" (press Enter to confirm):"
+        },
+        {
+          "kind": "output",
+          "value": "{\n  \"userId\": \"usr_019ff193c0e270019730fbaf84b0479c\"\n}"
+        },
+        {
+          "kind": "command",
+          "scope": "shell",
+          "command": "marcus-api",
+          "value": "marcus-api"
+        },
+        {
+          "kind": "annotation",
+          "value": "Terminal 2 · Marcus API queda disponible en http://127.0.0.1:5724"
+        },
+        {
+          "kind": "command",
+          "scope": "shell",
+          "command": "marcus",
+          "value": "marcus"
+        },
+        {
+          "kind": "muted",
+          "value": "Password for \"admin\" (press Enter to connect):"
+        },
+        {
+          "kind": "output",
+          "value": "Marcus CLI 0.1.0 · MNP/1\nType help for commands.\nLLM: not configured\nMarcus cannot run AI agents until the agent.default model role is assigned.\nRun this interactive assistant to configure the global default LLM:\n  config default\nmarcus>"
+        },
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "config default",
+          "value": "marcus> config default"
+        },
+        {
+          "kind": "muted",
+          "value": "Configure the global default LLM (agent.default).\n  openai     OpenAI · Modelos OpenAI con tools y Structured Outputs mediante JSON Schema.\n  deepseek   DeepSeek · DeepSeek V4 con Thinking Mode, tools y JSON Output.\nProvider (openai/deepseek): deepseek\nAPI key (press Enter to confirm): ••••••••••••••••\nDefault model name [deepseek-v4-pro]:"
+        },
+        {
+          "kind": "output",
+          "format": "json",
+          "value": "{\n  \"configured\": true,\n  \"provider\": { \"name\": \"deepseek\", \"catalogId\": \"deepseek\", \"status\": \"healthy\" },\n  \"role\": { \"role\": \"agent.default\", \"model\": \"deepseek-v4-pro\", \"configuration\": { \"thinking\": true, \"reasoningEffort\": \"high\" } }\n}"
+        }
+      ]
+    },
+    {
+      "id": "project",
+      "number": "03",
+      "label": "Proyecto",
+      "title": "Abrí un Project Home gobernado.",
+      "description": "La consola imprime las respuestas JSON reales del daemon y cambia el prompt cuando seleccionás el proyecto.",
+      "lines": [
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "project create testing-project",
+          "value": "marcus> project create testing-project"
+        },
+        {
+          "kind": "output",
+          "format": "json",
+          "value": "{\n  \"projectId\": \"prj_019ff2fda9e97000b6069cdc9c22b180\",\n  \"slug\": \"testing-project\",\n  \"name\": \"testing-project\",\n  \"status\": \"active\",\n  \"createdAt\": \"2026-08-11T22:42:18.217Z\",\n  \"updatedAt\": \"2026-08-11T22:42:18.217Z\"\n}"
+        },
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "use project testing-project",
+          "value": "marcus> use project testing-project"
+        },
+        {
+          "kind": "output",
+          "format": "json",
+          "value": "{\n  \"projectId\": \"prj_019ff2fda9e97000b6069cdc9c22b180\",\n  \"slug\": \"testing-project\",\n  \"name\": \"testing-project\",\n  \"status\": \"active\",\n  \"createdAt\": \"2026-08-11T22:42:18.217Z\",\n  \"updatedAt\": \"2026-08-11T22:42:18.217Z\"\n}"
+        },
+        {
+          "kind": "prompt",
+          "value": "marcus[testing-project:project:/]>"
+        }
+      ]
+    },
+    {
+      "id": "agent",
+      "number": "04",
+      "label": "Primer agente",
+      "title": "Del SDK a un Run encolado.",
+      "description": "Los comandos corresponden al parser real: scaffold genera un agente con input text, put lo sube, create registra su versión y run devuelve el handle del Run.",
+      "lines": [
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "agent scaffold ./alertas --kind sdk",
+          "value": "marcus[testing-project:project:/]> agent scaffold ./alertas --kind sdk"
+        },
+        {
+          "kind": "output",
+          "format": "json",
+          "value": "{\n  \"directory\": \"/home/developer/alertas\",\n  \"kind\": \"sdk\",\n  \"id\": \"alertas\"\n}"
+        },
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "put local:./alertas/index.ts project:/agents/alertas/index.ts",
+          "value": "marcus[testing-project:project:/]> put local:./alertas/index.ts project:/agents/alertas/index.ts"
+        },
+        {
+          "kind": "annotation",
+          "value": "La CLI devuelve el uploadId, SHA-256 y metadata de revisión del archivo. Salida contraída para lectura."
+        },
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "agent create project:/agents/alertas/index.ts",
+          "value": "marcus[testing-project:project:/]> agent create project:/agents/alertas/index.ts"
+        },
+        {
+          "kind": "annotation",
+          "value": "La CLI devuelve agentId, agentVersionId, el manifest marcus.agent/v1 completo y activated: true. Salida contraída para lectura."
+        },
+        {
+          "kind": "prompt",
+          "scope": "marcus",
+          "command": "agent run alertas --input '{\"text\":\"estado de alertas\"}'",
+          "value": "marcus[testing-project:project:/]> agent run alertas --input '{\"text\":\"estado de alertas\"}'"
+        },
+        {
+          "kind": "output",
+          "format": "json",
+          "value": "{\n  \"runId\": \"run_019ff30b52a97000b55a0a740641dbe8\",\n  \"state\": \"queued\",\n  \"agentVersionId\": \"av_019ff3098d9670008b65f8f3b35be19d\",\n  \"idempotentReplay\": false\n}"
+        }
+      ]
+    }
+  ]
+}

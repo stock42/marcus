@@ -1,0 +1,10 @@
+diff --git a/src/Server/index.ts b/src/Server/index.ts
+index 288c0cc4cbde21b5fdb799c85849ca35604ec038..9c7ea067d9788d35c5161374315ca53a55847b8c 100644
+--- a/src/Server/index.ts
++++ b/src/Server/index.ts
+@@ -11,0 +12 @@
++	hostname?: string
+@@ -81,0 +83 @@
++			hostname,
+@@ -106,0 +109 @@
++			hostname,

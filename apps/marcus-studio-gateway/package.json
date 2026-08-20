@@ -1,0 +1,24 @@
+{
+  "name": "@marcus/studio-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "@marcus/contracts": "workspace:*",
+    "@marcus/markdown": "workspace:*",
+    "@marcus/observability": "workspace:*",
+    "@marcus/provider-contracts": "workspace:*",
+    "@marcus/studio-contracts": "workspace:*",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "build": "bun -e \"process.exit(0)\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "tsc -p tsconfig.json",
+    "test": "bun test ./src",
+    "dev": "bun --watch src/index.ts",
+    "start": "NODE_ENV=production bun src/index.ts",
+    "verify:provider": "bun src/provider-smoke.ts"
+  }
+}

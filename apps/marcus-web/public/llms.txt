@@ -1,0 +1,34 @@
+# Marcus Agentic OS
+
+> Marcus is a self-hosted operating system for building, versioning, governing, and running AI agents inside infrastructure controlled by the operator. The public documentation is written in Spanish for teams in Latin America and Spain.
+
+Use the linked documentation as the source of truth for public Marcus authoring workflows. Marcus is Bun-first: TypeScript source runs natively and repository packages do not publish a dist directory. Markdown and TypeScript agents compile to immutable AgentVersions governed by the same Kernel. Marcus does not charge per agent; compute, storage, network, and LLM-provider consumption remain costs of the infrastructure selected by the operator.
+
+## Product
+
+- [Marcus Agentic OS](https://projectmarcus.com): Product overview, architecture, capabilities, CLI journey, and installer.
+- [Use cases](https://projectmarcus.com/casos-de-uso): Operational patterns for support, reports, incidents, documents, knowledge, and integrations.
+- [Marcus for companies](https://projectmarcus.com/empresas): Deployment options for SMEs and enterprises, cost model, governance, and operational boundaries.
+- [Agent Studio](https://projectmarcus.com/studio): Public Spanish authoring lab that generates and validates portable Marcus Markdown or TypeScript source without executing or deploying it.
+
+## Documentation
+
+- [Documentation hub](https://projectmarcus.com/documentacion): Authoring paths, complete Markdown examples, and MCP workflows for Codex and Claude.
+- [TypeScript SDK](https://projectmarcus.com/documentacion/sdk): Bun-native agent definition, schemas, lifecycle, testing, upload, build, and invocation.
+- [Markdown agents](https://projectmarcus.com/documentacion/markdown): marcus.agent/v1 frontmatter, sections, schemas, editing, compilation, and diagnostics.
+- [Official tools](https://projectmarcus.com/documentacion/tools): Complete official Tool Runtime catalog, schemas, risk, idempotency, timeout, audit, and human approval.
+
+## Build agents with MCP
+
+- [MCP connection and examples](https://projectmarcus.com/documentacion#mcp-title): Connect Codex or Claude to the administrator MCP, load official documentation, plan before writing, build, version, and verify agents.
+- [Markdown examples](https://projectmarcus.com/documentacion#markdown-examples-title): Complete declarative agents for support, scheduled operations, and approval-gated incident response.
+
+## Install
+
+- [Installer](https://projectmarcus.com/install): POSIX installer for Marcus CLI, daemon, and API. Review before piping to a shell in security-sensitive environments.
+
+## Optional
+
+- [Sitemap](https://projectmarcus.com/sitemap.xml): Index of public human-readable pages.
+- [GitHub](https://github.com/stock42/marcus): Source repository when public access is available.
+- [Stock42 LLC](https://stock42.com): Organization powering Marcus.
